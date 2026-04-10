@@ -1,0 +1,41 @@
+services:
+  user-service-db:
+    image: postgres:latest
+    container_name: user-service-db
+    restart: always
+    env_file:
+      - .env
+    environment:
+      POSTGRES_DB: $POSTGRESQL_DATABASE
+      POSTGRES_USER: $POSTGRESQL_USERNAME
+      POSTGRES_PASSWORD: $POSTGRESQL_PASSWORD
+    networks:
+      - delivery-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  user-service:
+    image: mykhailokornukh/user-service:latest
+    container_name: user-service
+    restart: always
+    depends_on:
+      user-service-db:
+        condition: service_healthy
+    env_file:
+      - .env
+    environment:
+      SPRING_APPLICATION_NAME: "user-service"
+      SPRING_DATASOURCE_URL: $POSTGRESQL_DATABASE_URL
+      SPRING_DATASOURCE_USERNAME: $POSTGRESQL_USERNAME
+      SPRING_DATASOURCE_PASSWORD: $POSTGRESQL_PASSWORD
+    ports:
+      - "8081:8081"
+    networks:
+      - delivery-network
+
+networks:
+  delivery-network:
+    driver: bridge
