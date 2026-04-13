@@ -26,7 +26,7 @@ public class UserServiceImpl implements UserService {
         log.info("Create user incoming :{}", createUserRequest);
         try {
             userRepository.save(userMapper.toUser(createUserRequest));
-        } catch (Throwable e) {
+        } catch (Exception e) {
             log.error("Can't create user with data: {}", createUserRequest);
             log.error("Throwing an exception: {}", e.getMessage());
         }
