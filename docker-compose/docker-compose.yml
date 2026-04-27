@@ -1,6 +1,6 @@
 services:
   user-service-db:
-    image: postgres:latest
+    image: postgres:16
     container_name: user-service-db
     restart: always
     env_file:
