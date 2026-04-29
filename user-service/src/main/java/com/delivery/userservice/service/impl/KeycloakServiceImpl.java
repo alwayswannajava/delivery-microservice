@@ -46,10 +46,6 @@ public class KeycloakServiceImpl implements KeycloakService {
                 return CreatedResponseUtil.getCreatedId(response);
             }
 
-            if (status == Response.Status.CONFLICT.getStatusCode()) {
-                throw new DuplicateUserException("User with email %s already exists in Keycloak".formatted(createUserRequest.email()));
-            }
-
             throw new KeycloakRegistrationException("Failed to create user in Keycloak. Status: " + status);
         }
     }
