@@ -1,16 +1,12 @@
 package com.delivery.userservice.repository;
 
 import com.delivery.userservice.entity.User;
-import org.jspecify.annotations.NonNull;
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-import java.util.List;
 import java.util.UUID;
 
 @Repository
-public interface UserRepository extends CrudRepository<User, UUID> {
+public interface UserRepository extends JpaRepository<User, UUID> {
 
-    <S extends User> S save(@NonNull S user);
-
-    @NonNull List<User> findAll();
+    boolean existsByEmail(String email);
 }

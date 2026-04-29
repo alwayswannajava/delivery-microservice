@@ -7,6 +7,19 @@ spring:
 
   application:
     name: user-service
+  keycloak:
+    server-url: ${KEYCLOAK_SERVER_URL}
+    admin-realm: ${KEYCLOAK_ADMIN_REALM}
+    realm: ${KEYCLOAK_REALM}
+    client-id: ${KEYCLOAK_CLIENT_ID}
+    username: ${KEYCLOAK_ADMIN_USERNAME}
+    password: ${KEYCLOAK_ADMIN_PASSWORD}
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: ${KEYCLOAK_ISSUER_URI}
+          jwk-set-uri: ${KEYCLOAK_JWK_SET_URI}
   datasource:
     url: jdbc:postgresql://localhost:5433/users?useSSL=false&serverTimezone=UTC
     username: ${POSTGRESQLDB_USERNAME}

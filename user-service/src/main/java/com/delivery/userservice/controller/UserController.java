@@ -19,7 +19,7 @@ public class UserController {
         this.userService = userService;
     }
 
-    @PostMapping("/new")
+    @PostMapping("/register")
     public ResponseEntity<Void> createUser(@RequestBody @Valid CreateUserRequest createUserRequest) {
         userService.create(createUserRequest);
         return ResponseEntity.status(HttpStatus.CREATED).build();
