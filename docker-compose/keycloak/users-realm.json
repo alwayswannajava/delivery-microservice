@@ -1,0 +1,24 @@
+{
+  "realm": "users-realm",
+  "enabled": true,
+  "registrationAllowed": false,
+  "loginWithEmailAllowed": true,
+  "duplicateEmailsAllowed": false,
+  "resetPasswordAllowed": true,
+  "clients": [
+    {
+      "clientId": "delivery-client",
+      "name": "Delivery Client",
+      "enabled": true,
+      "publicClient": true,
+      "standardFlowEnabled": true,
+      "directAccessGrantsEnabled": true,
+      "redirectUris": [
+        "*"
+      ],
+      "webOrigins": [
+        "*"
+      ]
+    }
+  ]
+}
