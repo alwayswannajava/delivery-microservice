@@ -15,8 +15,8 @@ public class KeycloakConfig {
     @Value("${spring.keycloak.admin-realm}")
     private String adminRealm;
 
-    @Value("${spring.keycloak.client-id}")
-    private String clientId;
+    @Value("${spring.keycloak.admin-client-id}")
+    private String adminClientId;
 
     @Value("${spring.keycloak.username}")
     private String username;
@@ -29,7 +29,7 @@ public class KeycloakConfig {
         return KeycloakBuilder.builder()
                 .serverUrl(serverUrl)
                 .realm(adminRealm)
-                .clientId(clientId)
+                .clientId(adminClientId)
                 .username(username)
                 .password(password)
                 .build();
