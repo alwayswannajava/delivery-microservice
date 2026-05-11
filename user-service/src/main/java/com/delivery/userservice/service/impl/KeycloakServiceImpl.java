@@ -1,7 +1,6 @@
 package com.delivery.userservice.service.impl;
 
 import com.delivery.userservice.dto.request.CreateUserRequest;
-import com.delivery.userservice.exception.DuplicateUserException;
 import com.delivery.userservice.exception.KeycloakRegistrationException;
 import com.delivery.userservice.service.KeycloakService;
 import jakarta.ws.rs.core.Response;

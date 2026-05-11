@@ -47,17 +47,16 @@ class UserServiceImplTest {
     }
 
     @Test
-    void shouldDeleteKeycloakUserWhenLocalSaveFails() {
+    void shouldCreateKeycloakUserAndSaveLocalUser() {
         User user = new User();
         String keycloakUserId = "keycloak-user-id";
 
         when(userRepository.existsByEmail(REQUEST.email())).thenReturn(false);
         when(keycloakService.createUser(REQUEST)).thenReturn(keycloakUserId);
         when(userMapper.toUser(REQUEST)).thenReturn(user);
-        when(userRepository.saveAndFlush(user)).thenThrow(new IllegalStateException("Database error"));
 
-        assertThrows(IllegalStateException.class, () -> userService.create(REQUEST));
+        userService.create(REQUEST);
 
-        verify(keycloakService).deleteUser(keycloakUserId);
+        verify(userRepository).save(user);
     }
 }

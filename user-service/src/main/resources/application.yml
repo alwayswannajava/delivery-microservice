@@ -1,0 +1,38 @@
+server:
+  port: 8081
+
+spring:
+  liquibase:
+    default-schema: public
+
+  application:
+    name: user-service
+  keycloak:
+    server-url: ${KEYCLOAK_SERVER_URL}
+    admin-realm: ${KEYCLOAK_ADMIN_REALM}
+    realm: ${KEYCLOAK_REALM}
+    client-id: ${KEYCLOAK_CLIENT_ID}
+    username: ${KEYCLOAK_ADMIN_USERNAME}
+    password: ${KEYCLOAK_ADMIN_PASSWORD}
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: ${KEYCLOAK_ISSUER_URI}
+          jwk-set-uri: ${KEYCLOAK_JWK_SET_URI}
+  datasource:
+    url: jdbc:postgresql://localhost:5433/users?useSSL=false&serverTimezone=UTC
+    username: ${POSTGRESQLDB_USERNAME}
+    password: ${POSTGRESQLDB_PASSWORD}
+    driver-class-name: org.postgresql.Driver
+    hikari:
+      maximum-pool-size: 10
+      minimum-idle: 5
+      idle-timeout: 30000
+      connection-timeout: 30000
+      max-lifetime: 1800000
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    show-sql: true
+    open-in-view: false
